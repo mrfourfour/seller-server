@@ -19,6 +19,8 @@ script: "./gradlew clean build"
 before_script:
   - chmod +x gradlew
 
+before_install:
+  - chmod + x gradlew
 deploy:
   provider: elasticbeanstalk
   access_key_id:
