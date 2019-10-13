@@ -16,6 +16,9 @@ script: "./gradlew clean build"
 
  #before_deploy: bash docker_push
 
+before_install:
+  - chmod +x gradlew
+
 deploy:
   provider: elasticbeanstalk
   access_key_id:
