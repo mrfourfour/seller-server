@@ -1,17 +1,19 @@
 language: java
 services:
   - docker
+jdk:
+  - openjdk11
 branches:
   only:
-    - master
-    - development
+  - master
+  - development
 cache:
   directories:
-    - "$HOME/.m2/repository"
-    - "$HOME/.gradle"
+  - "$HOME/.m2/repository"
+  - "$HOME/.gradle"
 script: "./gradlew clean build"
 
-before_deploy: bash docker_push
+#before_deploy: bash docker_push
 
 deploy:
   provider: elasticbeanstalk
@@ -28,7 +30,7 @@ deploy:
   region: "ap-northeast-2"
   app: "seller-server"
   env: "Ticket-seller"
-  bucket_name: "ticket-mrfourfour-bucket-seller"
+  bucket_name: "ticket-mrfourfour-bucket"
   on:
     repo: mrfourfour/seller-server
     branch: master
