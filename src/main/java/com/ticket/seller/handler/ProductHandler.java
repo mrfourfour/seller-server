@@ -1,21 +1,13 @@
 package com.ticket.seller.handler;
 
-import com.amazonaws.services.dynamodbv2.AmazonDynamoDB;
-import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
 import com.ticket.seller.model.Product;
-import com.ticket.seller.objectMapper.DynamoDbMapper;
 import com.ticket.seller.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.server.ServerRequest;
-import org.springframework.web.reactive.function.server.ServerRequestExtensionsKt;
 import org.springframework.web.reactive.function.server.ServerResponse;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
-import software.amazon.awssdk.services.dynamodb.DynamoDbAsyncClient;
-
-import java.util.Map;
 
 import static org.springframework.web.reactive.function.BodyInserters.fromObject;
 
