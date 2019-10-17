@@ -3,6 +3,7 @@ package com.ticket.seller.handler;
 import com.ticket.seller.model.Product;
 import com.ticket.seller.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.server.ServerRequest;
 import org.springframework.web.reactive.function.server.ServerResponse;
@@ -13,18 +14,17 @@ import static org.springframework.web.reactive.function.BodyInserters.fromObject
 
 @Component
 @RequiredArgsConstructor
+@Slf4j
 public class ProductHandler {
     private final ProductRepository productRepository;
 
     public Mono<ServerResponse> findAll(ServerRequest request) {
         Flux<Product> pdInfo = productRepository.findAll();
-
         return ServerResponse.ok().body(pdInfo, Product.class);
     }
 
     public Mono<ServerResponse> saveTest(ServerRequest request) {
         productRepository.saveTest();
-
         return ServerResponse.ok().body(fromObject("데이터 SaveTest완료"));
     }
 

@@ -1,5 +1,6 @@
 package com.ticket.seller.repository;
 
+import ch.qos.logback.classic.db.names.TableName;
 import com.ticket.seller.model.Ticket;
 import com.ticket.seller.objectMapper.TicketMapper;
 import lombok.RequiredArgsConstructor;
@@ -41,18 +42,7 @@ public class TicketRepository implements DynamoDbRepository<Ticket, String> {
 
     @Override
     public Mono<Ticket> findById(String id) {
-        GetItemRequest getItemRequest = GetItemRequest.builder()
-                .tableName("ticket")
-                .key(Map.of(
-                        "PK", AttributeValue.builder().s("Ticket").build(),
-                        "SK", AttributeValue.builder().s(id).build())
-                )
-                .build();
-
-        return Mono.fromFuture(client
-                .getItem(getItemRequest)
-                .thenApplyAsync(GetItemResponse::item)
-                .thenApplyAsync(ticketMapper::toObj));
+      return null;
     }
 
     @Override
@@ -68,8 +58,26 @@ public class TicketRepository implements DynamoDbRepository<Ticket, String> {
     }
 
     @Override
-    public Mono<Ticket> saveTest() {
-        return null;
+    public Flux<Ticket> findUserId(String userId) {
+        CompletableFuture<QueryResponse> res = client.query(QueryRequest.builder()
+                .tableName("ticket")
+                .indexName("PK-seller_id-index")
+                .keyConditionExpression("PK = :pk and seller_id = :seller")
+                .filterExpression("user_id = :user")
+                .expressionAttributeValues(Map.of(
+                        ":pk", AttributeValue.builder().s("Ticket").build(),
+                        ":seller", AttributeValue.builder().s("Naver").build(),
+                        ":user", AttributeValue.builder().s(userId).build()))
+                .build());
+
+        CompletableFuture<List<Ticket>> listCompletableFuture = res
+                .thenApplyAsync(QueryResponse::items)
+                .thenApplyAsync(list -> list.parallelStream()
+                        .map(ticketMapper::toObj)
+                        .collect(Collectors.toList())
+                );
+
+        return Mono.fromFuture(listCompletableFuture).flatMapMany(Flux::fromIterable);
     }
 
     @Override
@@ -77,6 +85,10 @@ public class TicketRepository implements DynamoDbRepository<Ticket, String> {
         return null;
     }
 
+    @Override
+    public Mono<Ticket> saveTest() {
+        return null;
+    }
 
     @Override
     public Mono<Void> delete() {

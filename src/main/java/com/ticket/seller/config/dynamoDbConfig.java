@@ -9,11 +9,10 @@ import software.amazon.awssdk.regions.Region;
 import software.amazon.awssdk.services.dynamodb.DynamoDbAsyncClient;
 @Configuration
 public class dynamoDbConfig {
-    @Value("${aws.db.accesskey}")
-    private String accessKey;
-    @Value("${aws.db.secretkey}")
-    private String secretKey;
-//    @Value("${aws.db.region}")
+    @Value("${aws.access.key}")
+    private String AWS_ACCESS_KEY;
+    @Value("${aws.secret.key}")
+    private String AWS_SECRET_KEY;
     private String region = "ap-northeast-2";
 
     @Bean
@@ -21,7 +20,7 @@ public class dynamoDbConfig {
         return DynamoDbAsyncClient.builder()
                 .region(Region.of(region))
                 .credentialsProvider(StaticCredentialsProvider.create(
-                        AwsBasicCredentials.create(accessKey, secretKey)
+                        AwsBasicCredentials.create(AWS_ACCESS_KEY, AWS_SECRET_KEY)
                 ))
                 .build();
     }

@@ -1,12 +1,12 @@
 {
-  "AWSEBDockerrunVersion": "1",
-  "Image": {
-    "Name": "ohg429/seller-server",
-    "Update": "true"
+    "AWSEBDockerrunVersion": "1",
+    "Image": {
+        "Name": "ohg429/seller-server",
+        "Update": "true"
   },
-  "Ports": [
-    {
-      "ContainerPort": "8080"
-    }
+    "Ports": [
+      {
+          "ContainerPort": "8080"
+      }
   ]
 }

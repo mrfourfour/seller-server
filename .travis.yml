@@ -18,9 +18,9 @@ script: "./gradlew clean build"
 
 before_script:
   - chmod +x gradlew
-
 before_install:
   - chmod +x gradlew
+
 deploy:
   provider: elasticbeanstalk
   access_key_id:
@@ -28,7 +28,7 @@ deploy:
   secret_access_key:
     secure: fK3lMSjOkx/4qX3H8mcSkJ3vyAkQTJvtbp7KYzu0VQE7BbwqLBJgLZWuXnVBJAeGjVYujXPCGkj+dqQ/nBT1fOt55TnEPc51w6vl7b8dxG3nQv4X7taXTEZnGCbztrXt979l4Knjam389HNqhoXRmfGKJdWhVHf6HgKls6c/icVJVfSz9dO11CTPxT83zeWanUXZYQ6FGcOB+comR1yEnjtXnBQngD/zjgNzIboE/EetvrPNDOlV4H/gTYlq3GOLVdiwJgcrgjmnx/IG7f4C9Rqzc392M+7ZY1MYvan104Sjzt30V2h3s/Ezt+tFzD+k20bSF547Vp6Fu7GwadrWQ3gwqWh0WOx0NkjnX/1c59CCyaR4YAqbLJoDvifVuHTyglFRHhKN7+ZltLcFpC3mmk0kwwXYmDCOnYqwmumTaofFN3sp0BdmQ7GM6w6RVLWx9zGKyEWMUGrCwBKeOyzZqAtZoeEWjk+wGB5Mf6NAjaWRsFM9oBmVGajw3mKG/UoKCVf8DE8xKSxJfnvPh07hhW/gr6ilBpvKQJfPKClxpV5h4HSLpEigorGV+TOCw/1NyPK5Z5NAI+3f2Wd/Wvxq2b066hSexuQKe7Sa7V3RykPwA0EIx5DwkwULjcXSgO/PMcUeDLuQrp1ifk81ENpHA7Oi1SGcnGPgdYpNMyPSryk=
   region: "ap-northeast-2"
-  app: "seller-server"
+  app: "ticket"
   env: "Ticket-seller"
   bucket_name: "ticket-mrfourfour-bucket"
   on:
