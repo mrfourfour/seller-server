@@ -18,6 +18,10 @@ configurations {
     }
 }
 
+bootJar{
+    archiveFileName = 'seller-server.jar'
+}
+
 repositories {
     mavenCentral()
 }

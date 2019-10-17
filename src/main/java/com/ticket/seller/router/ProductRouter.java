@@ -41,8 +41,10 @@ public class ProductRouter {
                 .andNest(path("/api/ticket"),
                         route(GET("/")
                             .and(accept(MediaType.APPLICATION_JSON_UTF8)),ticketHandler::findAll)
-                        .andRoute(POST("/save")
-                            .and(contentType(MediaType.APPLICATION_JSON_UTF8)), ticketHandler::save)
+                        .andRoute(GET("/{userId}")
+                            .and(accept(MediaType.APPLICATION_JSON_UTF8)), ticketHandler::findUserByTicket)
+//                        .andRoute(GET("/save")
+//                            .and(contentType(MediaType.APPLICATION_JSON_UTF8)), ticketHandler::save)
                 );
 
     }

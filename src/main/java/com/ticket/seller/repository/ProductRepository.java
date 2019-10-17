@@ -1,10 +1,9 @@
 package com.ticket.seller.repository;
 
-import ch.qos.logback.classic.db.names.TableName;
 import com.ticket.seller.model.Product;
+import com.ticket.seller.model.Ticket;
 import com.ticket.seller.objectMapper.DynamoDbMapper;
 import lombok.RequiredArgsConstructor;
-import org.reactivestreams.Publisher;
 import org.springframework.stereotype.Repository;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -66,7 +65,6 @@ public class ProductRepository implements DynamoDbRepository<Product, String>{
         return Mono.fromFuture(listCompletableFuture).flatMapMany(Flux::fromIterable);
     }
 
-
     @Override
     public Mono<Product> findById(String id) {
         GetItemRequest getItemRequest = GetItemRequest.builder()
@@ -119,6 +117,11 @@ public class ProductRepository implements DynamoDbRepository<Product, String>{
                .putItem(putItemRequest)
                .thenApplyAsync(PutItemResponse::attributes)
                .thenApplyAsync(productMapper::toObj));
+    }
+    @Override
+    public Flux<Ticket> findUserId(String userId) {
+
+        return null;
     }
     @Override
     public Mono<Void> delete() {
