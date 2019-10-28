@@ -1,6 +1,7 @@
 package com.ticket.seller.repository;
 
 import com.ticket.seller.objectMapper.ProductMapper;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +29,7 @@ public class ProductRepositoryTests {
 //    private AmazonS3Config amazonS3Config;
 
     @Test
-//    @Ignore
+    @Ignore
     public void createProduct() {
         PutItemRequest putItemRequest = PutItemRequest.builder()
                 .tableName("ticket")
