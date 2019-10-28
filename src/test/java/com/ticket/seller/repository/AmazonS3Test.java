@@ -1,6 +1,7 @@
 package com.ticket.seller.repository;
 
 import com.ticket.seller.config.AmazonS3Config;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,8 +27,9 @@ public class AmazonS3Test {
     private String BUCKET = "ticket-mrfourfour-bucket";
 
     @Test
+    @Ignore
     public void create() {
-        String KEY = "dockerfile4";
+        String KEY = "dockerfile";
                 client.s3AsyncClient();
                 CompletableFuture<PutObjectResponse> future = client.s3AsyncClient()
                         .putObject(
@@ -54,6 +56,7 @@ public class AmazonS3Test {
             }
 
     @Test
+    @Ignore
     public void read() {
         String KEY = "Dockerfile";
         client.s3AsyncClient();
