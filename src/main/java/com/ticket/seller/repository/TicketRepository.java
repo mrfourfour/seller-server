@@ -1,6 +1,5 @@
 package com.ticket.seller.repository;
 
-import ch.qos.logback.classic.db.names.TableName;
 import com.ticket.seller.model.Ticket;
 import com.ticket.seller.objectMapper.TicketMapper;
 import lombok.RequiredArgsConstructor;
@@ -57,7 +56,6 @@ public class TicketRepository implements DynamoDbRepository<Ticket, String> {
                 .thenApplyAsync(ticketMapper::toObj));
     }
 
-    @Override
     public Flux<Ticket> findUserId(String userId) {
         CompletableFuture<QueryResponse> res = client.query(QueryRequest.builder()
                 .tableName("ticket")

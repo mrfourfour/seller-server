@@ -1,6 +1,5 @@
 package com.ticket.seller.repository;
 
-import com.ticket.seller.model.Ticket;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
@@ -12,8 +11,6 @@ public interface DynamoDbRepository<T, I> {
 
     Mono<T> saveTest();
     Flux<T> findSeller(final I seller);
-
-    Flux<Ticket> findUserId(final I userId);
 
     Mono<Void> delete();
 }

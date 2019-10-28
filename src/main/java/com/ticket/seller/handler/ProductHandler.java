@@ -4,6 +4,7 @@ import com.ticket.seller.model.Product;
 import com.ticket.seller.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.server.ServerRequest;
 import org.springframework.web.reactive.function.server.ServerResponse;
@@ -31,7 +32,9 @@ public class ProductHandler {
     public Mono<ServerResponse> save(ServerRequest request) {
         Mono<Product> product = request.bodyToMono(Product.class);
         productRepository.save(product);
-        return ServerResponse.ok().body(fromObject("데이터 Save완료"));
+        return ServerResponse.ok()
+                .contentType(MediaType.APPLICATION_JSON_UTF8)
+                .body(fromObject("데이터 Save완료"));
     }
 
     public Mono<ServerResponse> findSeller(ServerRequest request) {

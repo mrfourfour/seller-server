@@ -1,7 +1,6 @@
 package com.ticket.seller.repository;
 
 import com.ticket.seller.model.Product;
-import com.ticket.seller.model.Ticket;
 import com.ticket.seller.objectMapper.DynamoDbMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
@@ -15,8 +14,6 @@ import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
 import java.util.stream.Collectors;
-
-import static java.lang.String.valueOf;
 
 @Repository
 @RequiredArgsConstructor
@@ -117,11 +114,6 @@ public class ProductRepository implements DynamoDbRepository<Product, String>{
                .putItem(putItemRequest)
                .thenApplyAsync(PutItemResponse::attributes)
                .thenApplyAsync(productMapper::toObj));
-    }
-    @Override
-    public Flux<Ticket> findUserId(String userId) {
-
-        return null;
     }
     @Override
     public Mono<Void> delete() {
