@@ -26,10 +26,13 @@ public class ProductRouter {
                 .andNest(path("/api/product"),
                         route(GET("/"),productHandler::findAll)
                             .andRoute(POST("/save"), productHandler::save)
-                            .andRoute(GET("/{seller}") , productHandler::findSeller))
+                            .andRoute(PUT("/update"), productHandler::update)
+                            .andRoute(DELETE("/{productId}"),productHandler::delete)
+                            .andRoute(GET("/sellerId/{sellerId}") , productHandler::findSeller)
+                            .andRoute(GET("/productId/{productId}"), productHandler::findByProductId))
                 .andNest(path("/api/ticket"),
                         route(GET("/"),ticketHandler::findAll)
-                            .andRoute(GET("/{userId}"), ticketHandler::findUserByTicket));
+                            .andRoute(GET("userId/{userId}"), ticketHandler::findUserByTicket));
 //                          .andRoute(GET("/save"), ticketHandler::save));
     }
 }

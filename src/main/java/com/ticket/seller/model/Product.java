@@ -1,14 +1,18 @@
 package com.ticket.seller.model;
 
-import jdk.jshell.Snippet;
 import lombok.*;
+
+import java.io.Serializable;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 @Getter
 @Setter
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class Product {
+public class Product implements Serializable {
         private String id;
         private String date;
         private String name;
@@ -19,8 +23,36 @@ public class Product {
         private String info;
         private ProductArea area;
         private Long price;
-        private String option;
-
+        @Builder.Default
+        private Double averageRate = 0.0;
+        private List<ProductOption> options;
+        @Builder.Default
+        private Set<Review> reviews = new HashSet<>();
+   /** 상품 옵션**/
+        @Data
+        @Builder
+        @NoArgsConstructor
+        @AllArgsConstructor
+        public static class ProductOption {
+                private String id;
+                private String description;
+                private String date;
+                private Long amount;
+        }
+   /** 상품 리뷰**/
+   @Getter
+   @Setter
+   @EqualsAndHashCode(exclude={ "rate", "title", "description" })
+   @Builder
+   @NoArgsConstructor
+   @AllArgsConstructor
+   public static class Review {
+           private String userId;
+           private String title;
+           private String description;
+           private Long rate;
+   }
+   /** 카테고리 **/
         public enum ProductCategory {
                 LEISURE("레져"),
                 EXHIBITION("전시"),
@@ -75,7 +107,7 @@ public class Product {
                         return value;
                 }
         }
-
+   /** 지역 **/
         public enum ProductArea {
                 SEOUL("서울"),
                 INCHEON("인천"),
