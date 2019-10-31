@@ -40,12 +40,13 @@ public class TicketRepository implements DynamoDbRepository<Ticket, String> {
     }
 
     @Override
-    public Mono<Ticket> findById(String id) {
-      return null;
+    public Mono<Ticket> findByProductId(String id) {
+        return null;
     }
 
+
     @Override
-    public Mono<Ticket> save(Mono<Ticket> ticket) {
+    public Mono<Ticket> save(Ticket ticket) {
         PutItemRequest request = PutItemRequest.builder()
                 .tableName("ticket")
                 .item(ticketMapper.toMap(ticket))
@@ -84,12 +85,14 @@ public class TicketRepository implements DynamoDbRepository<Ticket, String> {
     }
 
     @Override
-    public Mono<Ticket> saveTest() {
+    public Mono<Void> delete(String id) {
         return null;
     }
 
     @Override
-    public Mono<Void> delete() {
+    public Mono<Ticket> saveTest() {
         return null;
     }
+
+
 }

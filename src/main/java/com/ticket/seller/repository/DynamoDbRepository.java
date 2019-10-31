@@ -6,11 +6,11 @@ import reactor.core.publisher.Mono;
 public interface DynamoDbRepository<T, I> {
 
     Flux<T> findAll();
-    Mono<T> findById(final I id);
-    Mono<T> save(final Mono<T> t);
+    Mono<T> findByProductId(final I id);
+    Mono<T> save(final T t);
 
     Mono<T> saveTest();
     Flux<T> findSeller(final I seller);
 
-    Mono<Void> delete();
+    Mono<Void> delete(final I id);
 }
