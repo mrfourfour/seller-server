@@ -25,14 +25,15 @@ public class ProductRouter {
                         route(GET("/"), healthHandler::checkHealth))
                 .andNest(path("/api/product"),
                         route(GET("/"),productHandler::findAll)
-                            .andRoute(POST("/save"), productHandler::save)
-                            .andRoute(PUT("/update"), productHandler::update)
+                            .andRoute(POST("/"), productHandler::save)
+                            .andRoute(PUT("/"), productHandler::update)
                             .andRoute(DELETE("/{productId}"),productHandler::delete)
                             .andRoute(GET("/sellerId/{sellerId}") , productHandler::findSeller)
                             .andRoute(GET("/productId/{productId}"), productHandler::findByProductId))
                 .andNest(path("/api/ticket"),
                         route(GET("/"),ticketHandler::findAll)
-                            .andRoute(GET("userId/{userId}"), ticketHandler::findUserByTicket));
+                            .andRoute(GET("userId/{userId}"), ticketHandler::findUserByTicket)
+                            .andRoute(GET("/{ticketId}"), ticketHandler::processTicketToUse));
 //                          .andRoute(GET("/save"), ticketHandler::save));
     }
 }
