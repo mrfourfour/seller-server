@@ -123,7 +123,6 @@ public class ProductRepository implements DynamoDbRepository<Product, String>{
                         "PK", AttributeValue.builder().s("Product").build(),
                         "SK", AttributeValue.builder().s(id).build()
                 ))
-
                 .build();
 
         try{

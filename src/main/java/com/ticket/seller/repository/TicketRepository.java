@@ -39,6 +39,19 @@ public class TicketRepository implements DynamoDbRepository<Ticket, String> {
         return Mono.fromFuture(ticketListFuture).flatMapMany(Flux::fromIterable);
     }
 
+    public Mono<Ticket> findById(String ticketId) {
+        GetItemRequest getItemRequest = GetItemRequest.builder()
+                .tableName("ticket")
+                .key(Map.ofEntries(
+                        Map.entry("PK", AttributeValue.builder().s("Ticket").build()),
+                        Map.entry("SK", AttributeValue.builder().s(ticketId).build())
+                ))
+                .build();
+        return Mono.fromFuture(client.getItem(getItemRequest)
+            .thenApplyAsync(GetItemResponse::item)
+            .thenApplyAsync(ticketMapper::toObj));
+    }
+
     @Override
     public Mono<Ticket> findByProductId(String id) {
         return null;
