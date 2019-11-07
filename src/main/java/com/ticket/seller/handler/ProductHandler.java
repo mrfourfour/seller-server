@@ -85,14 +85,10 @@ public class ProductHandler {
         return ServerResponse.ok().body(findPdId, Product.class);
     }
 
-
     public Mono<ServerResponse> delete(ServerRequest request) {
         productRepository.delete(request.pathVariable("productId"));
         return ServerResponse.ok().body(fromObject("상품이 삭제되었습니다."));
-
     }
-
-
 }
 
 

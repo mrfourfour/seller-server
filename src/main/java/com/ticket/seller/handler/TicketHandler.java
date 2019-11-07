@@ -5,6 +5,7 @@ import com.ticket.seller.repository.TicketRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
+import org.springframework.web.reactive.function.BodyInserters;
 import org.springframework.web.reactive.function.server.ServerRequest;
 import org.springframework.web.reactive.function.server.ServerResponse;
 import reactor.core.publisher.Flux;
@@ -32,4 +33,12 @@ public class TicketHandler {
         return ServerResponse.ok().body(userTicket, Ticket.class);
     }
 
+    public Mono<ServerResponse> processTicketToUse(ServerRequest request) {
+        String ticketId = request.pathVariable("ticketId");
+
+        return ticketRepository.findById(ticketId).doOnNext(ticket -> {
+            ticket.setStatus(Ticket.TicketStatus.USED);
+            ticketRepository.save(ticket);
+        }).flatMap(ticket -> ServerResponse.ok().body(BodyInserters.fromObject(ticket)));
+    }
 }
